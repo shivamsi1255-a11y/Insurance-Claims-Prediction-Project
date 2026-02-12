@@ -1,287 +1,189 @@
-*🏥 Insurance Claims Prediction using Machine Learning
+# 🏥 Insurance Claims Prediction using Machine Learning  
 
+![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
+![Machine Learning](https://img.shields.io/badge/Machine%20Learning-Regression-green.svg)
+![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-Modeling-orange.svg)
+![Status](https://img.shields.io/badge/Project-Completed-brightgreen.svg)
 
+---
 
-
-
-
-
-
-📌 Overview
+## 📌 Overview  
 
 This project builds a Machine Learning regression system to predict insurance claim amounts based on demographic and health-related factors.
 
 Accurately predicting insurance claims helps insurers:
+- Assess financial risk  
+- Set fair and data-driven premiums  
+- Develop targeted wellness programs  
+- Improve underwriting strategies  
 
-Assess financial risk
+---
 
-Set fair and data-driven premiums
+# 🎯 Project Goals  
 
-Develop targeted wellness programs
+- Perform comprehensive Exploratory Data Analysis (EDA)
+- Clean and preprocess real-world data
+- Train and compare multiple regression models
+- Identify key drivers of insurance claims
+- Generate actionable business insights
 
-Improve underwriting strategies
+---
 
-🎯 Project Goals
-
-Perform comprehensive Exploratory Data Analysis (EDA)
-
-Clean and preprocess real-world data
-
-Train and compare multiple regression models
-
-Identify key drivers of insurance claims
-
-Generate actionable business insights
-
-🗂️ Dataset Description
+# 🗂️ Dataset Description  
 
 The dataset includes insurance policyholder information:
 
-Feature	Description
-Id	Unique identifier
-age	Age of policyholder
-gender	Male / Female
-bmi	Body Mass Index
-bloodpressure	Blood pressure reading
-diabetic	Yes / No
-children	Number of dependents
-smoker	Yes / No
-region	Residential region in US
-claim	Medical insurance claim amount (Target Variable)
-🔬 Methodology
-1️⃣ Data Loading & Inspection
+| Feature | Description |
+|----------|------------|
+| Id | Unique identifier |
+| age | Age of policyholder |
+| gender | Male / Female |
+| bmi | Body Mass Index |
+| bloodpressure | Blood pressure reading |
+| diabetic | Yes / No |
+| children | Number of dependents |
+| smoker | Yes / No |
+| region | Residential region in US |
+| claim | Medical insurance claim amount (Target Variable) |
 
-Loaded dataset using pandas
+---
 
-Used:
+# 🔬 Methodology  
 
-df.head()
+## 1️⃣ Data Loading & Inspection  
 
-df.info()
+- Loaded dataset using pandas
+- Used:
+  - df.head()
+  - df.info()
+  - df.describe()
+  - df.shape()
 
-df.describe()
+---
 
-df.shape
+## 2️⃣ Data Cleaning  
 
-2️⃣ Data Cleaning
+- Checked duplicates → df.duplicated().sum()
+- Checked missing values → df.isna().sum()
+- Missing values found in:
+  - age
+  - region
+- Removed using:
 
-Checked duplicates → df.duplicated().sum()
-
-Checked missing values → df.isna().sum()
-
-Missing values found in:
-
-age
-
-region
-
-Since missing values were minimal → removed using:
-
+```python
 df.dropna(inplace=True)
 
-3️⃣ Exploratory Data Analysis (EDA)
-📊 Numerical Analysis
+## 3️⃣ Exploratory Data Analysis (EDA)
 
-Histograms for:
+### 📊 Numerical Analysis
 
-Age
+Histograms were created for:
 
-BMI
+- Age  
+- BMI  
+- Blood Pressure  
+- Children  
+- Claim Amount  
 
-Blood Pressure
+### 📈 Categorical Analysis
 
-Children
+Count plots were generated for:
 
-Claim Amount
+- Gender  
+- Smoker  
+- Diabetic  
+- Region  
 
-📈 Categorical Analysis
+### 📦 Outlier Detection
 
-Count plots for:
+- Boxplot for BMI  
+- Boxplot for Claim Amount by Gender and Smoker Status  
 
-Gender
+---
 
-Smoker
+# ⚙️ Feature Engineering & Preprocessing
 
-Diabetic
-
-Region
-
-📦 Boxplots
-
-BMI Outlier Detection
-
-Claim Distribution by:
-
-Gender
-
-Smoker Status
-
-Diabetic Status
-
-🔎 Key Observation
-
-Smokers showed significantly higher claim amounts compared to non-smokers.
-
-⚙️ Feature Engineering & Preprocessing
-🔹 Feature Selection
+## 🔹 Feature Selection
 
 Selected Features:
 
-['age', 'gender', 'bmi', 'bloodpressure', 'diabetic', 'children', 'smoker']
 
+---
 
-Target Variable:
+## 🔹 Encoding
 
-claim
+Categorical features encoded using `LabelEncoder`:
 
-🔹 Encoding
+- gender  
+- diabetic  
+- smoker  
 
-Categorical features encoded using LabelEncoder:
+Encoders saved as `.pkl` files for deployment consistency.
 
-gender
+---
 
-diabetic
+## 🔹 Train-Test Split
 
-smoker
+- 80% Training Data  
+- 20% Testing Data  
+- Implemented using `train_test_split()`  
 
-Encoders saved as .pkl files for deployment consistency.
+---
 
-🔹 Train-Test Split
+# 🤖 Models Implemented
 
-80% Training
+- Linear Regression  
+- Decision Tree Regressor  
+- Random Forest Regressor  
+- Gradient Boosting Regressor  
 
-20% Testing
+---
 
-Used train_test_split()
+# 📊 Model Performance Comparison
 
-🤖 Models Implemented
+| Model | MAE | MSE | R² Score |
+|--------|--------|-------------|----------|
+| Linear Regression | ~5,034 | ~38M | 0.72 |
+| Decision Tree | ~5,170 | ~42M | 0.64 |
+| Random Forest | ~4,089 | ~28.36M | 0.80 |
+| ⭐ Gradient Boosting | ~3,847 | ~24.27M | 0.83 |
 
-Four regression models were trained:
+---
 
-Linear Regression
+# 🏆 Best Model: Gradient Boosting Regressor
 
-Decision Tree Regressor
+- Highest R² Score: **0.83**
+- Lowest MAE
+- Lowest MSE
+- Best generalization performance
 
-Random Forest Regressor
+---
 
-Gradient Boosting Regressor
+# 📌 Feature Importance
 
-📊 Model Performance Comparison
-Model	MAE	MSE	R² Score
-Linear Regression	~5,034	~38M	0.72
-Decision Tree	~5,170	~42M	0.64
-Random Forest	~4,089	~28.36M	0.80
-⭐ Gradient Boosting	~3,847	~24.27M	0.83
-🏆 Best Model: Gradient Boosting Regressor
+| Feature | Importance |
+|----------|------------|
+| Smoker | ~62% |
+| BMI | ~21% |
+| Blood Pressure | ~9% |
+| Others | <5% |
 
-Highest R² Score: 0.83
+---
 
-Lowest MAE
+# 💡 Business Insights
 
-Lowest MSE
+- Smoking status is the strongest predictor of insurance claims.
+- BMI and Blood Pressure significantly impact medical costs.
+- Ensemble models outperform simple regression models.
 
-Best generalization performance
+---
 
-Ensemble methods clearly outperformed individual models.
+# 🚀 Installation
 
-📌 Feature Importance Analysis
+Install required dependencies:
 
-Using Random Forest & Gradient Boosting:
-
-Feature	Importance
-🚬 Smoker	~62%
-🧮 BMI	~21%
-❤️ Blood Pressure	~9%
-👶 Children	~3%
-🎂 Age	~2%
-🩺 Diabetic	~2%
-👤 Gender	~1%
-🔥 Key Insight
-
-Smoking status is the dominant predictor of insurance claims.
-
-This single factor accounts for over half of the predictive power.
-
-💡 Business Insights for Insurance Industry
-🎯 Risk-Based Pricing
-
-Premiums can be adjusted more accurately based on:
-
-Smoking status
-
-BMI
-
-Blood pressure
-
-🏃 Preventive Health Programs
-
-Wellness initiatives targeting:
-
-Weight management
-
-Blood pressure control
-
-Smoking cessation
-
-🧠 Model Recommendation
-
-Deploy Gradient Boosting Regressor for production use.
-
-🚀 Installation & Usage
-1️⃣ Install Dependencies
+```bash
 pip install pandas numpy matplotlib seaborn scikit-learn
 
-2️⃣ Run Notebook
 
-Download insurance.csv
 
-Place in project folder
-
-Open Jupyter/Colab
-
-Run cells sequentially
-
-🔮 Future Enhancements
-
-Hyperparameter tuning (GridSearchCV)
-
-Add XGBoost / LightGBM
-
-Advanced feature engineering (interaction terms)
-
-Deploy using Streamlit or Flask
-
-Build REST API for real-time predictions
-
-🧾 Final Project Summary
-
-This project successfully:
-
-✔ Cleaned and analyzed real-world insurance data
-✔ Built and compared multiple regression models
-✔ Identified key health and lifestyle risk factors
-✔ Achieved 83% variance explanation using Gradient Boosting
-✔ Generated actionable business intelligence insights
-
-The project demonstrates the power of ensemble machine learning models in solving real-world financial prediction problems.
-
-📚 Tech Stack
-
-Python
-
-Pandas
-
-NumPy
-
-Matplotlib
-
-Seaborn
-
-Scikit-Learn
-
-Jupyter Notebook
-
-👨‍💻 Developed By
-
-Shivam Singh
-Data Science & Machine Learning Enthusiast
